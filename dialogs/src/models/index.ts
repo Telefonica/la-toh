@@ -24,18 +24,42 @@ export enum Intent {
 
 export enum Operation {
     BACK = 'intent.operation.sdk.back',
+    NEXT = 'intent.operation.la-toh.next',
+    PREV = 'intent.operation.la-toh.prev',
 }
 
 export enum Entity {
     MESSAGE = 'ent.message',
 }
 
+export type Hero = {
+    name: string;
+    realName: string;
+    superpower: string;
+    loveInterest: string;
+    nemesis: string;
+    group: string;
+    icon: string;
+    bgColor: string;
+    color: string;
+    secondaryColor: string;
+    bgVideo?: string;
+};
+
 export enum CustomAction {}
 
-export type ScreenMessage = {
+export type ScreenMessage = NavigationMessage | ActionMessage;
+
+export type NavigationMessage = {
     activeChannels: string[];
     screen: Screen | string;
     [key: string]: unknown;
+};
+
+export type ActionMessage = {
+    name?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    parameters?: Record<string, any>;
 };
 
 export interface HomeScreenMessage {
@@ -46,6 +70,8 @@ export interface HomeScreenMessage {
 export interface HeroesScreenMessage {
     title: string;
     options: string[];
+    currentIndex: number;
+    heroes: Hero[];
 }
 
 export interface VillainsScreenMessage {
