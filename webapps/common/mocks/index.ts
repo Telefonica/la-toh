@@ -19,7 +19,8 @@ const screen = (screen: Screen, msg: Record<string, any> = {}) => {
 };
 
 const home: HomeScreenMessage = {
-    title: 'Welcome to living apps!',
+    title: 'Welcome to Tour of Heroes!',
+    options: ['Go to Heroes', 'Go to Villains'],
 };
 
 export default script;

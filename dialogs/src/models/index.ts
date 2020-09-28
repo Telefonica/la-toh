@@ -16,6 +16,8 @@ export enum Screen {
 
 export enum Intent {
     HOME = 'intent.la-toh.home',
+    HEROES = 'intent.la-toh.heroes',
+    VILLAINS = 'intent.la-toh.villains',
 }
 
 export enum Operation {
@@ -30,4 +32,5 @@ export enum CustomAction {}
 
 export interface HomeScreenMessage {
     title: string;
+    options: string[];
 }

@@ -1,12 +1,43 @@
-import React from 'react';
-import { screenReady } from '@telefonica/la-web-sdk';
-import { HomeScreenMessage } from '../../../../../dialogs/src/models';
+import React, { useCallback } from 'react';
+import { AuraCommands, NavigableButton, screenReady, useAura } from '@telefonica/la-web-sdk';
+import { HomeScreenMessage, Intent } from '../../../../../dialogs/src/models';
+
+import './Home.scss';
 
 const HomeScreen: React.FC<HomeScreenMessage> = (data: HomeScreenMessage) => {
+    const { sendCommand } = useAura();
+
+    const goToHeroes = useCallback(() => {
+        sendCommand(AuraCommands.getAuraCommand(Intent.HEROES));
+    }, [sendCommand]);
+
+    const goToVillains = useCallback(() => {
+        sendCommand(AuraCommands.getAuraCommand(Intent.VILLAINS));
+    }, [sendCommand]);
+
     return (
-        <div className="HomeScreen">
-            <h1>HOME</h1>
-            <p>{data.title}</p>
+        <div id="home-wrapper">
+            <div id="heroes-wrapper">
+                <NavigableButton
+                    id="heroes-button"
+                    defaultClass="home-button"
+                    focusedClass="focused-home"
+                    defaultFocused={true}
+                    onClick={goToHeroes}
+                >
+                    {data.options[0]}
+                </NavigableButton>
+            </div>
+            <div id="villains-wrapper">
+                <NavigableButton
+                    id="villains-button"
+                    defaultClass="home-button"
+                    focusedClass="focused-home"
+                    onClick={goToVillains}
+                >
+                    {data.options[1]}
+                </NavigableButton>
+            </div>
         </div>
     );
 };
