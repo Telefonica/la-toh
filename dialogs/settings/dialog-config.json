@@ -1,0 +1,15 @@
+{
+  "dialogs": [
+    {
+      "triggerConditions": [
+        {
+          "contextFilters": [],
+          "intent": "intent.la-toh.home"
+        }
+      ],
+      "id": "la-toh-home",
+      "onlyIn": ["movistar-home", "set-top-box", "set-top-box-haac"]
+    }
+  ],
+  "name": "la-toh"
+}
