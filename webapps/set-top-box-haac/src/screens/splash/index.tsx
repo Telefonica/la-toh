@@ -11,7 +11,7 @@ const SplashScreen: React.FC<Preloadable> = ({ onReady }: Preloadable) => {
 
     useEffect(() => {
         // the method setBackground is used to use the svg as the background of the screen
-        background.setBackground(splashBg).then((img: any) => {
+        background.setBackground(splashBg).then((img: HTMLImageElement) => {
             // if for example the svg could not be set as the background,
             // a background color is set
             if (!img) {
