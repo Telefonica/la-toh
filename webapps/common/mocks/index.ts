@@ -2,12 +2,19 @@ import { Screen, Intent, HomeScreenMessage } from '../../../dialogs/src/models';
 
 const START = 'intent.internal.living-app.start';
 
-const script = {
-    [START]: () => screen(Screen.SPLASH),
-    [Intent.HOME]: () => screen(Screen.HOME, home),
+type ScreenMessage = {
+    activeChannels: string[];
+    screen: Screen | string;
+    [key: string]: unknown;
 };
 
-const screen = (screen: Screen, msg: Record<string, any> = {}) => {
+const script = {
+    [START]: (): ScreenMessage => screen(Screen.SPLASH),
+    [Intent.HOME]: (): ScreenMessage => screen(Screen.HOME, home),
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const screen = (screen: Screen, msg: Record<string, any> = {}): ScreenMessage => {
     return {
         activeChannels: ['movistar-home', 'set-top-box'],
         screen,
