@@ -39,3 +39,22 @@ export enum CustomAction {}
 export interface HomeScreenMessage {
     title: string;
 }
+
+export type Hero = {
+    name: string;
+    realName: string;
+    superpower: string;
+    loveInterest: string;
+    nemesis: string;
+    group: string;
+    icon: string;
+    bgColor: string;
+    color: string;
+    secondaryColor: string;
+    bgVideo?: string;
+};
+
+export interface HeroesScreenMessage {
+    title: string;
+    heroes: Hero[];
+}
