@@ -1,0 +1,40 @@
+{
+    "villains": [
+        {
+            "name": "Prankster",
+            "nemesis": "Manbat",
+            "superpower": "Chemical engineering",
+            "icon": "https://w7.pngwing.com/pngs/220/144/png-transparent-green-haired-skull-illustration-joker-harley-quinn-batman-logo-dc-comics-joker-heroes-leaf-fictional-character-thumbnail.png",
+            "bgColor": "#20d63e",
+            "color": "black",
+            "secondaryColor": "white"
+        },
+        {
+            "name": "El Notas",
+            "nemesis": "All Vindicators",
+            "superpower": "Infinity Stones",
+            "icon": "https://w7.pngwing.com/pngs/853/28/png-transparent-thanos-marvel-comics-the-infinity-gauntlet-comic-book-marvel-universe-american-comics-miscellaneous-comics-superhero-thumbnail.png",
+            "bgColor": "#c2b200",
+            "color": "green",
+            "secondaryColor": "#fbbe00"
+        },
+        {
+            "name": "Blue Elf",
+            "nemesis": "Manspider",
+            "superpower": "Strength, reflexes, agility",
+            "icon": "https://w7.pngwing.com/pngs/461/749/png-transparent-venom-spider-man-carnage-symbiote-television-carnage-fictional-characters-logo-fictional-character-thumbnail.png",
+            "bgColor": "#009130",
+            "color": "black",
+            "secondaryColor": "blue"
+        },
+        {
+            "name": "Loko",
+            "nemesis": "Ther",
+            "superpower": "Astral projection, illusions, strength",
+            "icon": "https://w7.pngwing.com/pngs/296/261/png-transparent-loki-nerd-character-geek-helmet-loki-fictional-characters-fictional-character-march-thumbnail.png",
+            "bgColor": "rgb(120, 0, 145)",
+            "color": "green",
+            "secondaryColor": "#d1a400"
+        }
+    ]
+}

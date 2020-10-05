@@ -4,8 +4,15 @@ import * as path from 'path';
 import configurationSchema from './config';
 import { LIBRARY_NAME } from './models';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 export = function setup(options: any, imports: any, register: (err: Error, result: any) => void) {
-    const dialogs = ['./dialogs/dialog-la-start', './dialogs/dialog-la-close', './dialogs/dialog-home'];
+    const dialogs = [
+        './dialogs/dialog-la-start',
+        './dialogs/dialog-la-close',
+        './dialogs/dialog-home',
+        './dialogs/dialog-heroes',
+        './dialogs/dialog-villains',
+    ];
 
     sdk.loader.excludeDialogs(dialogs, options);
 

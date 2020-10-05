@@ -20,10 +20,12 @@ export default class HomeDialog extends Dialog {
         return [HomeDialog.dialogPrompt];
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected async clearDialogState(stepContext: WaterfallStepContext): Promise<void> {
         return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private async _dialogStage(stepContext: WaterfallStepContext<any>): Promise<DialogTurnResult> {
         const msg: HomeScreenMessage = {
             title: 'Welcome to the Tour of Heroes!',

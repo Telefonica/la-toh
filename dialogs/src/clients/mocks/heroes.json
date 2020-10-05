@@ -7,11 +7,10 @@
             "loveInterest": "Feline Female",
             "nemesis": "Prankster",
             "group": "Righteousness Union",
-            "icon": "https://movistarhome-test.s3.amazonaws.com/test-carol/hello-living-apps/assets/manbat.svg",
+            "icon": "https://haac.azureedge.net/image/toh/manbat.png",
             "color": "white",
             "bgColor": "#0d751e",
-            "secondaryColor": "black",
-            "bgVideo": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            "secondaryColor": "black"
         },
         {
             "name": "Steel Man",
@@ -20,10 +19,11 @@
             "loveInterest": "Prepper Petts",
             "nemesis": "El Notas",
             "group": "Vindicators",
-            "icon": "https://movistarhome-test.s3.amazonaws.com/test-carol/hello-living-apps/assets/steelman.svg",
+            "icon": "https://haac.azureedge.net/image/toh/mansteel.png",
             "color": "white",
             "bgColor": "black",
-            "secondaryColor": "red"
+            "secondaryColor": "red",
+            "bgVideo": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
         },
         {
             "name": "Manspider",
@@ -32,7 +32,7 @@
             "loveInterest": "La Mary",
             "nemesis": "Blue Elf",
             "group": "Vindicators",
-            "icon": "https://movistarhome-test.s3.amazonaws.com/test-carol/hello-living-apps/assets/manspider.svg",
+            "icon": "https://haac.azureedge.net/image/toh/manspider.png",
             "bgColor": "grey",
             "color": "blue",
             "secondaryColor": "red"
