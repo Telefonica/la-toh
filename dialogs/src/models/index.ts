@@ -34,8 +34,6 @@ export enum Entity {
     NAME = 'ent.name',
 }
 
-export enum CustomAction {}
-
 export interface HomeScreenMessage {
     title: string;
 }
@@ -54,7 +52,22 @@ export type Hero = {
     bgVideo?: string;
 };
 
+export type Villain = {
+    name: string;
+    nemesis: string;
+    superpower: string;
+    icon: string;
+    bgColor: string;
+    color: string;
+    secondaryColor: string;
+};
+
 export interface HeroesScreenMessage {
     title: string;
     heroes: Hero[];
+}
+
+export interface VillainsScreenMessage {
+    title: string;
+    villains: Villain[];
 }
