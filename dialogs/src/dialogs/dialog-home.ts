@@ -34,7 +34,7 @@ export default class HomeDialog extends Dialog {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private async _dialogStage(stepContext: WaterfallStepContext<any>): Promise<DialogTurnResult> {
         const screenData: HomeScreenMessage = {
-            title: 'VIDEOGAMES CATEGORIES',
+            title: 'WELCOME TO THE TOUR OF HEROES!',
         };
 
         // answer for the webapp

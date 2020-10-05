@@ -1,0 +1,41 @@
+{
+    "heroes": [
+        {
+            "name": "Manbat",
+            "realName": "Francisco Rodríguez",
+            "superpower": "Super rich",
+            "loveInterest": "Feline Female",
+            "nemesis": "Prankster",
+            "group": "Righteousness Union",
+            "icon": "https://movistarhome-test.s3.amazonaws.com/test-carol/hello-living-apps/assets/manbat.svg",
+            "color": "white",
+            "bgColor": "#0d751e",
+            "secondaryColor": "black",
+            "bgVideo": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        },
+        {
+            "name": "Steel Man",
+            "realName": "Antonio Claro",
+            "superpower": "Super rich too",
+            "loveInterest": "Prepper Petts",
+            "nemesis": "El Notas",
+            "group": "Vindicators",
+            "icon": "https://movistarhome-test.s3.amazonaws.com/test-carol/hello-living-apps/assets/steelman.svg",
+            "color": "white",
+            "bgColor": "black",
+            "secondaryColor": "red"
+        },
+        {
+            "name": "Manspider",
+            "realName": "Pedro Parques",
+            "superpower": "Strength, speed, agility, spider-sense",
+            "loveInterest": "La Mary",
+            "nemesis": "Blue Elf",
+            "group": "Vindicators",
+            "icon": "https://movistarhome-test.s3.amazonaws.com/test-carol/hello-living-apps/assets/manspider.svg",
+            "bgColor": "grey",
+            "color": "blue",
+            "secondaryColor": "red"
+        }
+    ]
+}
