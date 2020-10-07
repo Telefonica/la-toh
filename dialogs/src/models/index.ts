@@ -46,6 +46,16 @@ export type Hero = {
     bgVideo?: string;
 };
 
+export interface Villain {
+    name: string;
+    nemesis: string;
+    superPower: string;
+    icon: string;
+    bgColor: string;
+    color: string;
+    secondaryColor: string;
+}
+
 export enum CustomAction {}
 
 export type ScreenMessage = NavigationMessage | ActionMessage;
@@ -77,4 +87,6 @@ export interface HeroesScreenMessage {
 export interface VillainsScreenMessage {
     title: string;
     options: string[];
+    currentIndex: number;
+    villains: Villain[];
 }
