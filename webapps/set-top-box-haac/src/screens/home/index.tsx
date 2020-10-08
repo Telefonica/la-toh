@@ -1,11 +1,16 @@
-import React, { useCallback } from 'react';
-import { AuraCommands, NavigableButton, screenReady, useAura } from '@telefonica/la-web-sdk';
+import React, { useCallback, useEffect } from 'react';
+import { AuraCommands, NavigableButton, screenReady, useAura, useBackground } from '@telefonica/la-web-sdk';
 import { HomeScreenMessage, Intent } from '../../../../../dialogs/src/models';
 
 import './Home.scss';
 
 const HomeScreen: React.FC<HomeScreenMessage> = (data: HomeScreenMessage) => {
     const { sendCommand } = useAura();
+    const background = useBackground();
+
+    useEffect(() => {
+        background.clearBackground();
+    }, []);
 
     const goToHeroes = useCallback(() => {
         sendCommand(AuraCommands.getAuraCommand(Intent.HEROES));
