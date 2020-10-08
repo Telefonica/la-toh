@@ -6,11 +6,11 @@ import './Home.scss';
 
 const HomeScreen: React.FC<HomeScreenMessage> = (data: HomeScreenMessage) => {
     const { sendCommand } = useAura();
-    const background = useBackground();
+    const { clearBackground } = useBackground();
 
     useEffect(() => {
-        background.clearBackground();
-    }, []);
+        clearBackground();
+    }, [clearBackground]);
 
     const goToHeroes = useCallback(() => {
         sendCommand(AuraCommands.getAuraCommand(Intent.HEROES));
