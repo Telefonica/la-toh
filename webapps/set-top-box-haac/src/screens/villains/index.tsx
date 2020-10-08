@@ -1,17 +1,17 @@
 import './Villains.scss';
 
-import { AuraCommands, Footer, NavigableButton, screenReady, useAura, useBackground } from '@telefonica/la-web-sdk';
+import { AuraCommands, Footer, screenReady, useAura, useBackground } from '@telefonica/la-web-sdk';
 import React, { useCallback, useEffect } from 'react';
 import { Intent, VillainsScreenMessage } from '../../../../../dialogs/src/models';
+import Button from '../../component/button';
 
 export const VillainsScreen: React.FC<VillainsScreenMessage> = (data: VillainsScreenMessage) => {
-    const background = useBackground();
+    const { clearBackground } = useBackground();
     const { sendCommand } = useAura();
 
     useEffect(() => {
-        background.clearBackground();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        clearBackground();
+    }, [clearBackground]);
 
     const goBack = useCallback(() => {
         sendCommand(AuraCommands.getBack());
@@ -25,23 +25,8 @@ export const VillainsScreen: React.FC<VillainsScreenMessage> = (data: VillainsSc
         <div id="villains">
             <h1 id="title"> {data.title}</h1>
             <Footer>
-                <NavigableButton
-                    id="back-button"
-                    defaultClass="button"
-                    defaultFocused={true}
-                    focusedClass="focused-button"
-                    onClick={goBack}
-                >
-                    {data.options[0]}
-                </NavigableButton>
-                <NavigableButton
-                    id="heroes-button"
-                    defaultClass="button"
-                    focusedClass="focused-button"
-                    onClick={goToHeroes}
-                >
-                    {data.options[1]}
-                </NavigableButton>
+                <Button id="back-button" defaultFocused={true} text={data.options[0]} onClick={goBack} />
+                <Button id="heroes-button" text={data.options[1]} onClick={goToHeroes} />
             </Footer>
         </div>
     );
