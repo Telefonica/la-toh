@@ -1,7 +1,7 @@
 export const LIBRARY_NAME = 'la-toh';
 
 export interface SessionData {
-    sampleKey: string;
+    currentIndex: number;
 }
 
 export enum DialogId {

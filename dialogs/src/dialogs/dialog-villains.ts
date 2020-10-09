@@ -61,11 +61,11 @@ export default class VillainsDialog extends sdk.Dialog {
         const cases: sdk.PromptCase[] = [
             {
                 operation: { value: Operation.BACK, synonyms: [] },
-                action: [sdk.RouteAction.POP],
+                action: [sdk.RouteAction.REPLACE, DialogId.HOME],
             },
             {
-                action: [sdk.RouteAction.REPLACE, DialogId.HEROES], // replace dialogId
                 operation: { value: Intent.HEROES, synonyms: [] }, // go Heroes
+                action: [sdk.RouteAction.REPLACE, DialogId.HEROES], // replace dialogId
             },
         ];
 

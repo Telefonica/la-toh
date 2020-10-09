@@ -1,7 +1,7 @@
 import * as sdk from '@telefonica/la-bot-sdk';
 import { DialogTurnResult, WaterfallStep, WaterfallStepContext, Choice } from 'botbuilder-dialogs';
 
-import { DialogId, LIBRARY_NAME, Intent, HeroesScreenMessage, Screen, Operation } from '../models';
+import { DialogId, LIBRARY_NAME, Intent, HeroesScreenMessage, Screen, Operation, SessionData } from '../models';
 import { ApiClient } from '../clients/api-client';
 
 /* dialog Heroes child of HOME */
@@ -21,22 +21,30 @@ export default class HeroesDialog extends sdk.Dialog {
         return [HeroesDialog.dialogPrompt];
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected async clearDialogState(stepContext: WaterfallStepContext): Promise<void> {
-        return;
+        const sessionData = await sdk.lifecycle.getSessionData<SessionData>(stepContext);
+        delete sessionData.currentIndex;
     }
 
     private async _dialogStage(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
+        const sessionData = await sdk.lifecycle.getSessionData<SessionData>(stepContext);
+        if (typeof sessionData.currentIndex === 'undefined') {
+            sessionData.currentIndex = 0;
+        }
+
         // instantiate the client
         const apiClient = new ApiClient(this.config, stepContext);
 
         // heroes data
         const heroes = await apiClient.getHeroes();
 
+        // sanitize the index
+        const index = this._sanitize(sessionData.currentIndex, heroes.length);
+
         const screenData: HeroesScreenMessage = {
             title: 'CHOOSE YOUR HERO!',
             options: ['Go Back', 'Go to Villains'],
-            currentIndex: 0,
+            currentIndex: index,
             heroes,
         };
 
@@ -51,6 +59,14 @@ export default class HeroesDialog extends sdk.Dialog {
                 synonyms: [],
             },
             {
+                value: Operation.NEXT,
+                synonyms: [],
+            },
+            {
+                value: Operation.PREV,
+                synonyms: [],
+            },
+            {
                 value: Intent.VILLAINS,
                 synonyms: [],
             },
@@ -62,7 +78,21 @@ export default class HeroesDialog extends sdk.Dialog {
         const cases: sdk.PromptCase[] = [
             {
                 operation: { value: Operation.BACK, synonyms: [] },
-                action: [sdk.RouteAction.POP],
+                action: [sdk.RouteAction.REPLACE, DialogId.HOME],
+            },
+            {
+                operation: { value: Operation.NEXT, synonyms: [] }, // next
+                logic: async () => {
+                    const sessionData = await sdk.lifecycle.getSessionData<SessionData>(stepContext);
+                    sessionData.currentIndex++;
+                },
+            },
+            {
+                operation: { value: Operation.PREV, synonyms: [] }, // prev
+                logic: async () => {
+                    const sessionData = await sdk.lifecycle.getSessionData<SessionData>(stepContext);
+                    sessionData.currentIndex--;
+                },
             },
             {
                 operation: { value: Intent.VILLAINS, synonyms: [] }, // go Villains
@@ -71,5 +101,9 @@ export default class HeroesDialog extends sdk.Dialog {
         ];
 
         return super.promptHandler(stepContext, cases);
+    }
+
+    private _sanitize(index: number, length: number): number {
+        return (index + length * (Math.trunc(Math.abs(index) / length) + 1)) % length;
     }
 }
