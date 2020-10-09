@@ -6,6 +6,8 @@ export interface SessionData {
 
 export enum DialogId {
     HOME = 'la-toh-home',
+    VILLAINS = 'la-toh-villains',
+    HEROES = 'la-toh-heroes',
 }
 
 export enum Screen {
