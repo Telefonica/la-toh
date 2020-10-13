@@ -9,6 +9,26 @@
       ],
       "id": "la-toh-home",
       "onlyIn": ["movistar-home", "set-top-box", "set-top-box-haac"]
+    },
+    {
+      "triggerConditions": [
+        {
+          "contextFilters": [],
+          "intent": "intent.la-toh.heroes"
+        }
+      ],
+      "id": "la-toh-heroes",
+      "onlyIn": ["movistar-home", "set-top-box", "set-top-box-haac"]
+    },
+    {
+      "triggerConditions": [
+        {
+          "contextFilters": [],
+          "intent": "intent.la-toh.villains"
+        }
+      ],
+      "id": "la-toh-villains",
+      "onlyIn": ["movistar-home", "set-top-box", "set-top-box-haac"]
     }
   ],
   "name": "la-toh"

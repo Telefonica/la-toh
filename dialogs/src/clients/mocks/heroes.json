@@ -1,0 +1,41 @@
+{
+    "heroes": [
+        {
+            "name": "Manbat",
+            "realName": "Francisco Rodríguez",
+            "superpower": "Super rich",
+            "loveInterest": "Feline Female",
+            "nemesis": "Prankster",
+            "group": "Righteousness Union",
+            "icon": "https://haac.azureedge.net/image/toh/manbat.png",
+            "color": "white",
+            "bgColor": "#0d751e",
+            "secondaryColor": "black"
+        },
+        {
+            "name": "Steel Man",
+            "realName": "Antonio Claro",
+            "superpower": "Super rich too",
+            "loveInterest": "Prepper Petts",
+            "nemesis": "El Notas",
+            "group": "Vindicators",
+            "icon": "https://haac.azureedge.net/image/toh/mansteel.png",
+            "color": "white",
+            "bgColor": "black",
+            "secondaryColor": "red",
+            "bgVideo": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+        },
+        {
+            "name": "Manspider",
+            "realName": "Pedro Parques",
+            "superpower": "Strength, speed, agility, spider-sense",
+            "loveInterest": "La Mary",
+            "nemesis": "Blue Elf",
+            "group": "Vindicators",
+            "icon": "https://haac.azureedge.net/image/toh/manspider.png",
+            "bgColor": "grey",
+            "color": "blue",
+            "secondaryColor": "red"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+.button {
+    min-width: 350px;
+    font-size: 40px;
+    font-family: inherit;
+    height: 94px;
+    line-height: 80px;
+    background-color: black;
+    color: white;
+    border: 5px white solid;
+}
+
+.focused-button {
+    background-color: white;
+    color: black;
+}

@@ -1,4 +1,4 @@
-import { HomeScreenMessage } from './../models';
+import { HomeScreenMessage, Intent } from './../models';
 import { Operation } from './../models/index';
 import { Configuration, Dialog, PromptCase, ScreenMessage } from '@telefonica/la-bot-sdk';
 import * as sdk from '@telefonica/la-bot-sdk';
@@ -20,18 +20,34 @@ export default class HomeDialog extends Dialog {
         return [HomeDialog.dialogPrompt];
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected async clearDialogState(stepContext: WaterfallStepContext): Promise<void> {
         return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private async _dialogStage(stepContext: WaterfallStepContext<any>): Promise<DialogTurnResult> {
         const msg: HomeScreenMessage = {
-            title: 'Welcome to Living Apps!',
+            title: 'Welcome to the Tour of Heroes!',
+            options: ['Go to Heroes', 'Go to Villains'],
         };
 
         await sdk.messaging.send(stepContext, new ScreenMessage(Screen.HOME, msg));
 
-        const choices: (Choice | string)[] = [{ value: Operation.BACK, synonyms: [] }];
+        const choices: (Choice | string)[] = [
+            {
+                value: Operation.BACK,
+                synonyms: [],
+            },
+            {
+                value: Intent.HEROES,
+                synonyms: [],
+            },
+            {
+                value: Intent.VILLAINS,
+                synonyms: [],
+            },
+        ];
 
         return await sdk.messaging.prompt(stepContext, HomeDialog.dialogPrompt, choices);
     }
@@ -41,6 +57,14 @@ export default class HomeDialog extends Dialog {
             {
                 operation: { value: Operation.BACK, synonyms: [] },
                 action: [sdk.RouteAction.CLOSE],
+            },
+            {
+                operation: { value: Intent.HEROES, synonyms: [] },
+                action: [sdk.RouteAction.PUSH, DialogId.HEROES],
+            },
+            {
+                operation: { value: Intent.VILLAINS, synonyms: [] },
+                action: [sdk.RouteAction.PUSH, DialogId.VILLAINS],
             },
         ];
 
