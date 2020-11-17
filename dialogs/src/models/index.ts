@@ -1,3 +1,5 @@
+import { Suggestion } from '@telefonica/la-bot-sdk';
+
 export const LIBRARY_NAME = 'la-toh';
 
 export interface SessionData {
@@ -75,6 +77,7 @@ export type ActionMessage = {
 export interface HomeScreenMessage {
     title: string;
     options: string[];
+    suggestions: Suggestion[];
 }
 
 export interface HeroesScreenMessage {
@@ -82,6 +85,7 @@ export interface HeroesScreenMessage {
     options: string[];
     currentIndex: number;
     heroes: Hero[];
+    suggestions: Suggestion[];
 }
 
 export interface VillainsScreenMessage {
@@ -89,4 +93,5 @@ export interface VillainsScreenMessage {
     options: string[];
     currentIndex: number;
     villains: Villain[];
+    suggestions: Suggestion[];
 }

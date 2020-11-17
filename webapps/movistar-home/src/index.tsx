@@ -5,7 +5,7 @@ import { init, Channel } from '@telefonica/la-web-sdk';
 import { Screen } from '../../../dialogs/src/models';
 import { SplashScreen } from './screens/splash';
 import ErrorRscreen from './screens/error';
-import HomeScreen from './screens/home';
+import MhSuggestionsWrapper from './components/mhSuggestionsWrapper';
 
 init({
     channel: Channel.MH,
@@ -13,7 +13,9 @@ init({
     screens: {
         [Screen.SPLASH]: () => SplashScreen,
         [Screen.ERROR]: () => ErrorRscreen,
-        [Screen.HOME]: () => HomeScreen,
+        [Screen.HOME]: () => MhSuggestionsWrapper,
+        [Screen.HEROES]: () => MhSuggestionsWrapper,
+        [Screen.VILLAINS]: () => MhSuggestionsWrapper,
     },
     buildNumber: process.env.BUILD_NUMBER,
     auraMockClient:

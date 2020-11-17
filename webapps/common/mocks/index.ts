@@ -70,6 +70,7 @@ const screen = (screen: Screen, msg: Record<string, any> = {}) => {
     return {
         activeChannels: ['movistar-home', 'set-top-box'],
         screen,
+        title: 'Welcome to Tour of Heroes!',
         ...msg,
     };
 };
@@ -77,6 +78,18 @@ const screen = (screen: Screen, msg: Record<string, any> = {}) => {
 const home: HomeScreenMessage = {
     title: 'Welcome to Tour of Heroes!',
     options: ['Go to Heroes', 'Go to Villains'],
+    suggestions: [
+        {
+            title: 'GO TO HEROES',
+            intent: Intent.HEROES,
+            entities: {},
+        },
+        {
+            title: 'GO TO VILLAINS',
+            intent: Intent.VILLAINS,
+            entities: {},
+        },
+    ],
 };
 
 const heroes: HeroesScreenMessage = {
@@ -120,6 +133,28 @@ const heroes: HeroesScreenMessage = {
             bgColor: 'grey',
             color: 'blue',
             secondaryColor: 'red',
+        },
+    ],
+    suggestions: [
+        {
+            title: 'GO TO VILLAINS',
+            intent: Intent.VILLAINS,
+            entities: {},
+        },
+        {
+            title: 'NEXT',
+            intent: Operation.NEXT,
+            entities: {},
+        },
+        {
+            title: 'PREVIOUS',
+            intent: Operation.PREV,
+            entities: {},
+        },
+        {
+            title: 'HOME',
+            intent: Intent.HOME,
+            entities: {},
         },
     ],
 };
@@ -168,6 +203,18 @@ const villains: VillainsScreenMessage = {
             bgColor: 'rgb(120, 0, 145)',
             color: 'green',
             secondaryColor: '#d1a400',
+        },
+    ],
+    suggestions: [
+        {
+            title: 'GO TO HEROES',
+            intent: Intent.HEROES,
+            entities: {},
+        },
+        {
+            title: 'HOME',
+            intent: Intent.HOME,
+            entities: {},
         },
     ],
 };
