@@ -55,11 +55,11 @@ const HeroesScreen: React.FC<HeroesScreenMessage> = (data: HeroesScreenMessage) 
                 const newIndex = actions[0]?.parameters?.newIndex;
                 switch (actions[0].name) {
                     case 'LIVING_APP.NEXT':
-                        setCurrentHero((old: number) => (hasNewIndex ? newIndex : old + (1 % data.heroes.length)));
+                        setCurrentHero((old: number) => (hasNewIndex ? newIndex : ((old + 1) % data.heroes.length);
                         break;
                     case 'LIVING_APP.PREVIOUS':
                         setCurrentHero((old: number) =>
-                            hasNewIndex ? newIndex : (data.heroes.length + old - 1) % data.heroes.length,
+                            hasNewIndex ? newIndex : ((data.heroes.length + old - 1)%data.heroes.length),
                         );
                         break;
                 }
