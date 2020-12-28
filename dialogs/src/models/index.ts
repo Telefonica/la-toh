@@ -18,12 +18,12 @@ export enum Screen {
 
 export enum Intent {
     HOME = 'intent.la-toh.home',
-    HEROES = 'intent.la-toh.heroes',
-    VILLAINS = 'intent.la-toh.villains',
 }
 
 export enum Operation {
     BACK = 'intent.operation.sdk.back',
+    HEROES = 'intent.operation.la-toh.heroes',
+    VILLAINS = 'intent.operation.la-toh.villains',
     NEXT = 'intent.operation.la-toh.next',
     PREV = 'intent.operation.la-toh.prev',
 }
