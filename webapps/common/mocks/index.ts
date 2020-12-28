@@ -77,7 +77,6 @@ const screen = (screen: Screen, msg: Record<string, any> = {}) => {
 
 const home: HomeScreenMessage = {
     title: 'Welcome to Tour of Heroes!',
-    options: ['Go to Heroes', 'Go to Villains'],
     suggestions: [
         {
             title: 'GO TO HEROES',
@@ -94,7 +93,6 @@ const home: HomeScreenMessage = {
 
 const heroes: HeroesScreenMessage = {
     title: 'Choose your heroe!',
-    options: ['Go back', 'Go to Villains'],
     currentIndex: 0,
     heroes: [
         {
@@ -137,6 +135,11 @@ const heroes: HeroesScreenMessage = {
     ],
     suggestions: [
         {
+            title: 'BACK',
+            intent: Operation.BACK,
+            entities: {},
+        },
+        {
             title: 'GO TO VILLAINS',
             intent: Operation.VILLAINS,
             entities: {},
@@ -151,17 +154,11 @@ const heroes: HeroesScreenMessage = {
             intent: Operation.PREV,
             entities: {},
         },
-        {
-            title: 'HOME',
-            intent: Intent.HOME,
-            entities: {},
-        },
     ],
 };
 
 const villains: VillainsScreenMessage = {
     title: 'Choose your villain!',
-    options: ['Go back', 'Go to Heroes'],
     currentIndex: 0,
     villains: [
         {
@@ -207,13 +204,13 @@ const villains: VillainsScreenMessage = {
     ],
     suggestions: [
         {
-            title: 'GO TO HEROES',
-            intent: Operation.HEROES,
+            title: 'BACK',
+            intent: Operation.BACK,
             entities: {},
         },
         {
-            title: 'HOME',
-            intent: Intent.HOME,
+            title: 'GO TO HEROES',
+            intent: Operation.HEROES,
             entities: {},
         },
     ],

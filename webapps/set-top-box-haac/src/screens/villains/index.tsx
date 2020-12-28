@@ -71,8 +71,8 @@ export const VillainsScreen: React.FC<VillainsScreenMessage> = (data: VillainsSc
                 ))}
             </BaseCarousel>
             <Footer>
-                <Button id="back-button" text={data.options[0]} onClick={goBack} />
-                <Button id="heroes-button" text={data.options[1]} onClick={goToHeroes} />
+                <Button id="back-button" text={data.suggestions[0].title} onClick={goBack} />
+                <Button id="heroes-button" text={data.suggestions[1].title} onClick={goToHeroes} />
             </Footer>
         </div>
     );

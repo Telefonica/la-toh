@@ -97,8 +97,8 @@ const HeroesScreen: React.FC<HeroesScreenMessage> = (data: HeroesScreenMessage) 
             <h1 id="title"> {data.title} </h1>
             <HeroComponent hero={data.heroes[currentHero]} current={currentHero} focused={heroFocused} />
             <Footer>
-                <Button id="back-button" makeFocused={!heroFocused} text={data.options[0]} onClick={goBack} />
-                <Button id="villains-button" text={data.options[1]} onClick={goToVillains} />
+                <Button id="back-button" makeFocused={!heroFocused} text={data.suggestions[0].title} onClick={goBack} />
+                <Button id="villains-button" text={data.suggestions[1].title} onClick={goToVillains} />
             </Footer>
         </div>
     );

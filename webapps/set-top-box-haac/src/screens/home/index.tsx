@@ -30,7 +30,7 @@ const HomeScreen: React.FC<HomeScreenMessage> = (data: HomeScreenMessage) => {
                     defaultFocused={true}
                     onClick={goToHeroes}
                 >
-                    {data.options[0]}
+                    {data.suggestions[0].title}
                 </NavigableButton>
             </div>
             <div id="villains-wrapper">
@@ -40,7 +40,7 @@ const HomeScreen: React.FC<HomeScreenMessage> = (data: HomeScreenMessage) => {
                     focusedClass="focused-home"
                     onClick={goToVillains}
                 >
-                    {data.options[1]}
+                    {data.suggestions[1].title}
                 </NavigableButton>
             </div>
         </div>

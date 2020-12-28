@@ -76,13 +76,11 @@ export type ActionMessage = {
 
 export interface HomeScreenMessage {
     title: string;
-    options: string[];
     suggestions: Suggestion[];
 }
 
 export interface HeroesScreenMessage {
     title: string;
-    options: string[];
     currentIndex: number;
     heroes: Hero[];
     suggestions: Suggestion[];
@@ -90,7 +88,6 @@ export interface HeroesScreenMessage {
 
 export interface VillainsScreenMessage {
     title: string;
-    options: string[];
     currentIndex: number;
     villains: Villain[];
     suggestions: Suggestion[];
