@@ -1,3 +1,5 @@
+import { Suggestion } from '@telefonica/la-bot-sdk';
+
 export const LIBRARY_NAME = 'la-toh';
 
 export interface SessionData {
@@ -20,12 +22,12 @@ export enum Screen {
 
 export enum Intent {
     HOME = 'intent.la-toh.home',
-    HEROES = 'intent.la-toh.heroes',
-    VILLAINS = 'intent.la-toh.villains',
 }
 
 export enum Operation {
     BACK = 'intent.operation.sdk.back',
+    HEROES = 'intent.operation.la-toh.heroes',
+    VILLAINS = 'intent.operation.la-toh.villains',
     NEXT = 'intent.operation.la-toh.next',
     PREV = 'intent.operation.la-toh.prev',
 }
@@ -76,19 +78,19 @@ export type ActionMessage = {
 
 export interface HomeScreenMessage {
     title: string;
-    options: string[];
+    suggestions: Suggestion[];
 }
 
 export interface HeroesScreenMessage {
     title: string;
-    options: string[];
     currentIndex: number;
     heroes: Hero[];
+    suggestions: Suggestion[];
 }
 
 export interface VillainsScreenMessage {
     title: string;
-    options: string[];
     currentIndex: number;
     villains: Villain[];
+    suggestions: Suggestion[];
 }

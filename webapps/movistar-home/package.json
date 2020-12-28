@@ -8,7 +8,7 @@
     "build:mock": "REACT_APP_AURA_MOCK_CLIENT=true react-app-rewired build"
   },
   "dependencies": {
-    "@telefonica/la-web-sdk": "beta",
+    "@telefonica/la-web-sdk": "^2.2.11",
     "classnames": "^2.2.6",
     "jss": "^10.4.0",
     "jss-plugin-camel-case": "^10.4.0",
