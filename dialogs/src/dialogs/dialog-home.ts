@@ -7,6 +7,21 @@ import { DialogId, LIBRARY_NAME, Screen, HomeScreenMessage, Operation } from '..
 export default class HomeDialog extends Dialog {
     static readonly dialogPrompt = `${DialogId.HOME}-prompt`;
 
+    private choices: Record<string, Choice> = {
+        [Operation.BACK]: {
+            value: Operation.BACK,
+            synonyms: ['atrás', 'volver'],
+        },
+        [Operation.HEROES]: {
+            value: Operation.HEROES,
+            synonyms: ['héroes'],
+        },
+        [Operation.VILLAINS]: {
+            value: Operation.VILLAINS,
+            synonyms: ['villanos'],
+        },
+    };
+
     constructor(config: Configuration) {
         super(LIBRARY_NAME, DialogId.HOME, config);
     }
@@ -42,36 +57,21 @@ export default class HomeDialog extends Dialog {
 
         await sdk.messaging.send(stepContext, new ScreenMessage(Screen.HOME, msg));
 
-        const choices: (Choice | string)[] = [
-            {
-                value: Operation.BACK,
-                synonyms: ['atrás', 'volver'],
-            },
-            {
-                value: Operation.HEROES,
-                synonyms: ['héroes'],
-            },
-            {
-                value: Operation.VILLAINS,
-                synonyms: ['villanos'],
-            },
-        ];
-
-        return await sdk.messaging.prompt(stepContext, HomeDialog.dialogPrompt, choices);
+        return await sdk.messaging.prompt(stepContext, HomeDialog.dialogPrompt, Object.values(this.choices));
     }
 
     private async _promptResponse(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
         const cases: PromptCase[] = [
             {
-                operation: { value: Operation.BACK, synonyms: [] },
+                operation: this.choices[Operation.BACK],
                 action: [sdk.RouteAction.CLOSE],
             },
             {
-                operation: { value: Operation.HEROES, synonyms: [] },
+                operation: this.choices[Operation.HEROES],
                 action: [sdk.RouteAction.PUSH, DialogId.HEROES],
             },
             {
-                operation: { value: Operation.VILLAINS, synonyms: [] },
+                operation: this.choices[Operation.VILLAINS],
                 action: [sdk.RouteAction.PUSH, DialogId.VILLAINS],
             },
         ];
