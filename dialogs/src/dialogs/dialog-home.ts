@@ -1,9 +1,8 @@
-import { HomeScreenMessage, Intent } from './../models';
-import { Operation } from './../models/index';
 import { Configuration, Dialog, PromptCase, ScreenMessage } from '@telefonica/la-bot-sdk';
 import * as sdk from '@telefonica/la-bot-sdk';
 import { DialogTurnResult, WaterfallStep, WaterfallStepContext, Choice } from 'botbuilder-dialogs';
-import { DialogId, LIBRARY_NAME, Screen } from '../models';
+
+import { DialogId, LIBRARY_NAME, Screen, HomeScreenMessage, Operation } from '../models';
 
 export default class HomeDialog extends Dialog {
     static readonly dialogPrompt = `${DialogId.HOME}-prompt`;
@@ -27,7 +26,18 @@ export default class HomeDialog extends Dialog {
     private async _dialogStage(stepContext: WaterfallStepContext<any>): Promise<DialogTurnResult> {
         const msg: HomeScreenMessage = {
             title: 'Welcome to the Tour of Heroes!',
-            options: ['Go to Heroes', 'Go to Villains'],
+            suggestions: [
+                {
+                    title: 'GO TO HEROES',
+                    intent: Operation.HEROES,
+                    entities: {},
+                },
+                {
+                    title: 'GO TO VILLAINS',
+                    intent: Operation.VILLAINS,
+                    entities: {},
+                },
+            ],
         };
 
         await sdk.messaging.send(stepContext, new ScreenMessage(Screen.HOME, msg));
@@ -35,15 +45,15 @@ export default class HomeDialog extends Dialog {
         const choices: (Choice | string)[] = [
             {
                 value: Operation.BACK,
-                synonyms: [],
+                synonyms: ['atrás', 'volver'],
             },
             {
-                value: Intent.HEROES,
-                synonyms: [],
+                value: Operation.HEROES,
+                synonyms: ['héroes'],
             },
             {
-                value: Intent.VILLAINS,
-                synonyms: [],
+                value: Operation.VILLAINS,
+                synonyms: ['villanos'],
             },
         ];
 
@@ -57,11 +67,11 @@ export default class HomeDialog extends Dialog {
                 action: [sdk.RouteAction.CLOSE],
             },
             {
-                operation: { value: Intent.HEROES, synonyms: [] },
+                operation: { value: Operation.HEROES, synonyms: [] },
                 action: [sdk.RouteAction.PUSH, DialogId.HEROES],
             },
             {
-                operation: { value: Intent.VILLAINS, synonyms: [] },
+                operation: { value: Operation.VILLAINS, synonyms: [] },
                 action: [sdk.RouteAction.PUSH, DialogId.VILLAINS],
             },
         ];
