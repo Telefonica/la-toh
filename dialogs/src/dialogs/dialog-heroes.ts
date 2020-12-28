@@ -1,13 +1,32 @@
 import * as sdk from '@telefonica/la-bot-sdk';
 import { DialogTurnResult, WaterfallStep, WaterfallStepContext, Choice } from 'botbuilder-dialogs';
 
-import { DialogId, LIBRARY_NAME, Intent, HeroesScreenMessage, Screen, Operation, SessionData } from '../models';
 import { ApiClient } from '../clients/api-client';
+import { DialogId, LIBRARY_NAME, HeroesScreenMessage, Screen, Operation, SessionData } from '../models';
 
 /* dialog Heroes child of HOME */
 
 export default class HeroesDialog extends sdk.Dialog {
     static readonly dialogPrompt = `${DialogId.HEROES}-prompt`;
+
+    private choices: Record<string, Choice> = {
+        [Operation.BACK]: {
+            value: Operation.BACK,
+            synonyms: ['atrás', 'volver'],
+        },
+        [Operation.NEXT]: {
+            value: Operation.NEXT,
+            synonyms: ['siguiente'],
+        },
+        [Operation.PREV]: {
+            value: Operation.PREV,
+            synonyms: ['anterior'],
+        },
+        [Operation.VILLAINS]: {
+            value: Operation.VILLAINS,
+            synonyms: ['villanos'],
+        },
+    };
 
     constructor(config: sdk.Configuration) {
         super(LIBRARY_NAME, DialogId.HEROES, config);
@@ -43,9 +62,30 @@ export default class HeroesDialog extends sdk.Dialog {
 
         const screenData: HeroesScreenMessage = {
             title: 'CHOOSE YOUR HERO!',
-            options: ['Go Back', 'Go to Villains'],
             currentIndex: index,
             heroes,
+            suggestions: [
+                {
+                    title: 'BACK',
+                    intent: Operation.BACK,
+                    entities: {},
+                },
+                {
+                    title: 'GO TO VILLAINS',
+                    intent: Operation.VILLAINS,
+                    entities: {},
+                },
+                {
+                    title: 'NEXT',
+                    intent: Operation.NEXT,
+                    entities: {},
+                },
+                {
+                    title: 'PREVIOUS',
+                    intent: Operation.PREV,
+                    entities: {},
+                },
+            ],
         };
 
         // answer for the webapp
@@ -53,49 +93,31 @@ export default class HeroesDialog extends sdk.Dialog {
 
         await sdk.messaging.send(stepContext, message);
 
-        const choices: (Choice | string)[] = [
-            {
-                value: Operation.BACK,
-                synonyms: [],
-            },
-            {
-                value: Operation.NEXT,
-                synonyms: [],
-            },
-            {
-                value: Operation.PREV,
-                synonyms: [],
-            },
-            {
-                value: Intent.VILLAINS,
-                synonyms: [],
-            },
-        ];
-        return await sdk.messaging.prompt(stepContext, HeroesDialog.dialogPrompt, choices);
+        return await sdk.messaging.prompt(stepContext, HeroesDialog.dialogPrompt, Object.values(this.choices));
     }
 
     private async _promptResponse(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
         const cases: sdk.PromptCase[] = [
             {
-                operation: { value: Operation.BACK, synonyms: [] },
+                operation: this.choices[Operation.BACK],
                 action: [sdk.RouteAction.REPLACE, DialogId.HOME],
             },
             {
-                operation: { value: Operation.NEXT, synonyms: [] }, // next
+                operation: this.choices[Operation.NEXT], // next
                 logic: async () => {
                     const sessionData = await sdk.lifecycle.getSessionData<SessionData>(stepContext);
                     sessionData.currentIndex++;
                 },
             },
             {
-                operation: { value: Operation.PREV, synonyms: [] }, // prev
+                operation: this.choices[Operation.PREV], // prev
                 logic: async () => {
                     const sessionData = await sdk.lifecycle.getSessionData<SessionData>(stepContext);
                     sessionData.currentIndex--;
                 },
             },
             {
-                operation: { value: Intent.VILLAINS, synonyms: [] }, // go Villains
+                operation: this.choices[Operation.VILLAINS], // go Villains
                 action: [sdk.RouteAction.REPLACE, DialogId.VILLAINS], // replace dialogId
             },
         ];

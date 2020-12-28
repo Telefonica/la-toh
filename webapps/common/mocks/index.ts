@@ -21,14 +21,14 @@ const script = {
         lastScreen = screen(Screen.HOME, home);
         return lastScreen;
     },
-    [Intent.HEROES]: (): ScreenMessage => {
+    [Operation.HEROES]: (): ScreenMessage => {
         if (lastScreen) {
             breadcrumbs.push(lastScreen);
         }
         lastScreen = screen(Screen.HEROES, heroes);
         return lastScreen;
     },
-    [Intent.VILLAINS]: (): ScreenMessage => {
+    [Operation.VILLAINS]: (): ScreenMessage => {
         if (lastScreen) {
             breadcrumbs.push(lastScreen);
         }
@@ -70,18 +70,29 @@ const screen = (screen: Screen, msg: Record<string, any> = {}) => {
     return {
         activeChannels: ['movistar-home', 'set-top-box'],
         screen,
+        title: 'Welcome to Tour of Heroes!',
         ...msg,
     };
 };
 
 const home: HomeScreenMessage = {
     title: 'Welcome to Tour of Heroes!',
-    options: ['Go to Heroes', 'Go to Villains'],
+    suggestions: [
+        {
+            title: 'GO TO HEROES',
+            intent: Operation.HEROES,
+            entities: {},
+        },
+        {
+            title: 'GO TO VILLAINS',
+            intent: Operation.VILLAINS,
+            entities: {},
+        },
+    ],
 };
 
 const heroes: HeroesScreenMessage = {
     title: 'Choose your heroe!',
-    options: ['Go back', 'Go to Villains'],
     currentIndex: 0,
     heroes: [
         {
@@ -122,11 +133,32 @@ const heroes: HeroesScreenMessage = {
             secondaryColor: 'red',
         },
     ],
+    suggestions: [
+        {
+            title: 'BACK',
+            intent: Operation.BACK,
+            entities: {},
+        },
+        {
+            title: 'GO TO VILLAINS',
+            intent: Operation.VILLAINS,
+            entities: {},
+        },
+        {
+            title: 'NEXT',
+            intent: Operation.NEXT,
+            entities: {},
+        },
+        {
+            title: 'PREVIOUS',
+            intent: Operation.PREV,
+            entities: {},
+        },
+    ],
 };
 
 const villains: VillainsScreenMessage = {
     title: 'Choose your villain!',
-    options: ['Go back', 'Go to Heroes'],
     currentIndex: 0,
     villains: [
         {
@@ -168,6 +200,18 @@ const villains: VillainsScreenMessage = {
             bgColor: 'rgb(120, 0, 145)',
             color: 'green',
             secondaryColor: '#d1a400',
+        },
+    ],
+    suggestions: [
+        {
+            title: 'BACK',
+            intent: Operation.BACK,
+            entities: {},
+        },
+        {
+            title: 'GO TO HEROES',
+            intent: Operation.HEROES,
+            entities: {},
         },
     ],
 };
