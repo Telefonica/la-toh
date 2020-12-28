@@ -1,13 +1,14 @@
 import './Heroes.scss';
 
-import { Footer, useAura, useBackground, AuraCommands, screenReady } from '@telefonica/la-web-sdk';
+import { Footer, useAura, useBackground, AuraCommands, screenReady, useBack } from '@telefonica/la-web-sdk';
 import React, { useCallback, useEffect } from 'react';
-import { HeroesScreenMessage, Intent } from '../../../../../dialogs/src/models';
+import { HeroesScreenMessage, Operation } from '../../../../../dialogs/src/models';
 import Button from '../../component/button';
 
 const HeroesScreen: React.FC<HeroesScreenMessage> = (data: HeroesScreenMessage) => {
     const { clearBackground } = useBackground();
     const { sendCommand } = useAura();
+    useBack();
 
     useEffect(() => {
         clearBackground();
@@ -18,7 +19,7 @@ const HeroesScreen: React.FC<HeroesScreenMessage> = (data: HeroesScreenMessage) 
     }, [sendCommand]);
 
     const goToVillains = useCallback(() => {
-        sendCommand(AuraCommands.getAuraCommand(Intent.VILLAINS));
+        sendCommand(AuraCommands.getAuraCommand(Operation.VILLAINS));
     }, [sendCommand]);
 
     return (
