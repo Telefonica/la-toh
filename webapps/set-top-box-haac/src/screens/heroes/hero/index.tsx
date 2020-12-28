@@ -11,7 +11,7 @@ type HeroProps = {
 
 export const HeroComponent: React.FC<HeroProps> = ({ hero, current, focused }: HeroProps) => {
     return (
-        <NavigableWrapper defaultFocused={focused} id={`hero-${current}`} focusedClass="focused">
+        <NavigableWrapper id={`hero-${current}`} makeFocused={focused} focusedClass="focused">
             <div className="hero-wrapper" style={{ color: hero.color || 'white' }}>
                 <img src={hero.icon} className="icon" alt="Hero icon" />
                 <div className="hero-info">
