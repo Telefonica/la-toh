@@ -21,14 +21,14 @@ const script = {
         lastScreen = screen(Screen.HOME, home);
         return lastScreen;
     },
-    [Intent.HEROES]: (): ScreenMessage => {
+    [Operation.HEROES]: (): ScreenMessage => {
         if (lastScreen) {
             breadcrumbs.push(lastScreen);
         }
         lastScreen = screen(Screen.HEROES, heroes);
         return lastScreen;
     },
-    [Intent.VILLAINS]: (): ScreenMessage => {
+    [Operation.VILLAINS]: (): ScreenMessage => {
         if (lastScreen) {
             breadcrumbs.push(lastScreen);
         }

@@ -1,5 +1,4 @@
 import './Heroes.scss';
-
 import {
     Footer,
     AuraCommands,
@@ -11,15 +10,17 @@ import {
     useAura,
     useBackground,
     useInput,
+    useBack,
 } from '@telefonica/la-web-sdk';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActionMessage, HeroesScreenMessage, Intent, Operation } from '../../../../../dialogs/src/models';
+import { ActionMessage, HeroesScreenMessage, Operation } from '../../../../../dialogs/src/models';
 import { HeroComponent } from './hero';
 import Button from '../../component/button';
 
 const HeroesScreen: React.FC<HeroesScreenMessage> = (data: HeroesScreenMessage) => {
     const { clearBackground, setBackgroundColor } = useBackground();
     const { sendCommand } = useAura();
+    useBack();
 
     const { playVideo, stopVideo } = useVideo();
     const [heroFocused, setHeroFocused] = useState<boolean>(true);
@@ -55,7 +56,7 @@ const HeroesScreen: React.FC<HeroesScreenMessage> = (data: HeroesScreenMessage) 
                 const newIndex = actions[0]?.parameters?.newIndex;
                 switch (actions[0].name) {
                     case 'LIVING_APP.NEXT':
-                        setCurrentHero((old: number) => (hasNewIndex ? newIndex : old + (1 % data.heroes.length)));
+                        setCurrentHero((old: number) => (hasNewIndex ? newIndex : (old + 1) % data.heroes.length));
                         break;
                     case 'LIVING_APP.PREVIOUS':
                         setCurrentHero((old: number) =>
@@ -88,7 +89,7 @@ const HeroesScreen: React.FC<HeroesScreenMessage> = (data: HeroesScreenMessage) 
     }, [sendCommand]);
 
     const goToVillains = useCallback(() => {
-        sendCommand(AuraCommands.getAuraCommand(Intent.VILLAINS));
+        sendCommand(AuraCommands.getAuraCommand(Operation.VILLAINS));
     }, [sendCommand]);
 
     return (
