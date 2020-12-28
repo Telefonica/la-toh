@@ -1,5 +1,5 @@
 import * as sdk from '@telefonica/la-bot-sdk';
-import { Choice, DialogTurnResult, WaterfallStep, WaterfallStepContext } from 'botbuilder-dialogs';
+import { DialogTurnResult, WaterfallStep, WaterfallStepContext } from 'botbuilder-dialogs';
 
 import { ApiClient } from '../clients/api-client';
 import { DialogId, LIBRARY_NAME, VillainsScreenMessage, Screen, Operation } from '../models';
@@ -8,17 +8,6 @@ import { DialogId, LIBRARY_NAME, VillainsScreenMessage, Screen, Operation } from
 
 export default class VillainsDialog extends sdk.Dialog {
     static readonly dialogPrompt = `${DialogId.VILLAINS}-prompt`;
-
-    private choices: Record<string, Choice> = {
-        [Operation.BACK]: {
-            value: Operation.BACK,
-            synonyms: ['atrás', 'volver'],
-        },
-        [Operation.HEROES]: {
-            value: Operation.HEROES,
-            synonyms: ['héroes'],
-        },
-    };
 
     constructor(config: sdk.Configuration) {
         super(LIBRARY_NAME, DialogId.VILLAINS, config);
@@ -67,21 +56,25 @@ export default class VillainsDialog extends sdk.Dialog {
 
         await sdk.messaging.send(stepContext, message);
 
-        return await sdk.messaging.prompt(stepContext, VillainsDialog.dialogPrompt, Object.values(this.choices));
+        return await sdk.messaging.prompt(
+            stepContext,
+            VillainsDialog.dialogPrompt,
+            this.cases.map((el) => el.operation),
+        );
     }
 
-    private async _promptResponse(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
-        const cases: sdk.PromptCase[] = [
-            {
-                operation: this.choices[Operation.BACK],
-                action: [sdk.RouteAction.REPLACE, DialogId.HOME],
-            },
-            {
-                operation: this.choices[Operation.HEROES], // go Heroes
-                action: [sdk.RouteAction.REPLACE, DialogId.HEROES], // replace dialogId
-            },
-        ];
+    private cases: sdk.PromptCase[] = [
+        {
+            operation: { value: Operation.BACK, synonyms: ['volver'] },
+            action: [sdk.RouteAction.REPLACE, DialogId.HOME],
+        },
+        {
+            operation: { value: Operation.HEROES, synonyms: ['héroes'] }, // go Heroes
+            action: [sdk.RouteAction.REPLACE, DialogId.HEROES], // replace dialogId
+        },
+    ];
 
-        return super.promptHandler(stepContext, cases);
+    private async _promptResponse(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
+        return super.promptHandler(stepContext, this.cases);
     }
 }
