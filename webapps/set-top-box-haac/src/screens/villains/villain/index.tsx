@@ -7,18 +7,13 @@ type VillainProps = {
     villain: Villain;
     current: number;
     onFocus: Function;
-    defaultFocused: boolean;
+    focused: boolean;
 };
 
-export const VillainComponent: React.FC<VillainProps> = ({
-    villain,
-    current,
-    onFocus,
-    defaultFocused,
-}: VillainProps) => {
+export const VillainComponent: React.FC<VillainProps> = ({ villain, current, onFocus, focused }: VillainProps) => {
     return (
         <NavigableWrapper
-            defaultFocused={defaultFocused}
+            makeFocused={focused}
             focusedClass="focused"
             id={`villain-${current}`}
             onFocus={(e: Event) => onFocus(villain, e)}
