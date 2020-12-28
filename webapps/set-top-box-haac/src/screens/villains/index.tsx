@@ -66,7 +66,7 @@ export const VillainsScreen: React.FC<VillainsScreenMessage> = (data: VillainsSc
                         villain={villain}
                         current={index}
                         onFocus={onVillainFocus}
-                        defaultFocused={index === 0}
+                        focused={index === 0}
                     />
                 ))}
             </BaseCarousel>

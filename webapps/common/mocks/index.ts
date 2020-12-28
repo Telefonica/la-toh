@@ -81,12 +81,12 @@ const home: HomeScreenMessage = {
     suggestions: [
         {
             title: 'GO TO HEROES',
-            intent: Intent.HEROES,
+            intent: Operation.HEROES,
             entities: {},
         },
         {
             title: 'GO TO VILLAINS',
-            intent: Intent.VILLAINS,
+            intent: Operation.VILLAINS,
             entities: {},
         },
     ],
@@ -138,7 +138,7 @@ const heroes: HeroesScreenMessage = {
     suggestions: [
         {
             title: 'GO TO VILLAINS',
-            intent: Intent.VILLAINS,
+            intent: Operation.VILLAINS,
             entities: {},
         },
         {
@@ -208,7 +208,7 @@ const villains: VillainsScreenMessage = {
     suggestions: [
         {
             title: 'GO TO HEROES',
-            intent: Intent.HEROES,
+            intent: Operation.HEROES,
             entities: {},
         },
         {
