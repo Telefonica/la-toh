@@ -1,5 +1,5 @@
 import * as sdk from '@telefonica/la-bot-sdk';
-import { DialogTurnResult, WaterfallStep, WaterfallStepContext, Choice } from 'botbuilder-dialogs';
+import { DialogTurnResult, WaterfallStep, WaterfallStepContext } from 'botbuilder-dialogs';
 
 import { ApiClient } from '../clients/api-client';
 import { DialogId, LIBRARY_NAME, HeroesScreenMessage, Screen, Operation, SessionData } from '../models';
@@ -8,25 +8,6 @@ import { DialogId, LIBRARY_NAME, HeroesScreenMessage, Screen, Operation, Session
 
 export default class HeroesDialog extends sdk.Dialog {
     static readonly dialogPrompt = `${DialogId.HEROES}-prompt`;
-
-    private choices: Record<string, Choice> = {
-        [Operation.BACK]: {
-            value: Operation.BACK,
-            synonyms: ['atrás', 'volver'],
-        },
-        [Operation.NEXT]: {
-            value: Operation.NEXT,
-            synonyms: ['siguiente'],
-        },
-        [Operation.PREV]: {
-            value: Operation.PREV,
-            synonyms: ['anterior'],
-        },
-        [Operation.VILLAINS]: {
-            value: Operation.VILLAINS,
-            synonyms: ['villanos'],
-        },
-    };
 
     constructor(config: sdk.Configuration) {
         super(LIBRARY_NAME, DialogId.HEROES, config);
@@ -93,36 +74,42 @@ export default class HeroesDialog extends sdk.Dialog {
 
         await sdk.messaging.send(stepContext, message);
 
-        return await sdk.messaging.prompt(stepContext, HeroesDialog.dialogPrompt, Object.values(this.choices));
+        return await sdk.messaging.prompt(
+            stepContext,
+            HeroesDialog.dialogPrompt,
+            this.getCases(stepContext).map((el) => el.operation),
+        );
     }
 
-    private async _promptResponse(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
-        const cases: sdk.PromptCase[] = [
+    private getCases(stepContext: WaterfallStepContext): sdk.PromptCase[] {
+        return [
             {
-                operation: this.choices[Operation.BACK],
+                operation: { value: Operation.BACK, synonyms: ['volver'] },
                 action: [sdk.RouteAction.REPLACE, DialogId.HOME],
             },
             {
-                operation: this.choices[Operation.NEXT], // next
+                operation: { value: Operation.NEXT, synonyms: ['siguiente'] }, // next
                 logic: async () => {
                     const sessionData = await sdk.lifecycle.getSessionData<SessionData>(stepContext);
                     sessionData.currentIndex++;
                 },
             },
             {
-                operation: this.choices[Operation.PREV], // prev
+                operation: { value: Operation.PREV, synonyms: ['anterior'] }, // prev
                 logic: async () => {
                     const sessionData = await sdk.lifecycle.getSessionData<SessionData>(stepContext);
                     sessionData.currentIndex--;
                 },
             },
             {
-                operation: this.choices[Operation.VILLAINS], // go Villains
+                operation: { value: Operation.VILLAINS, synonyms: ['villanos'] }, // go Villains
                 action: [sdk.RouteAction.REPLACE, DialogId.VILLAINS], // replace dialogId
             },
         ];
+    }
 
-        return super.promptHandler(stepContext, cases);
+    private async _promptResponse(stepContext: WaterfallStepContext): Promise<DialogTurnResult> {
+        return super.promptHandler(stepContext, this.getCases(stepContext));
     }
 
     private _sanitize(index: number, length: number): number {
